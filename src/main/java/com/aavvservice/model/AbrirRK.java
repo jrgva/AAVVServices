@@ -37,7 +37,9 @@ public class AbrirRK {
         return datosReclamacion;
     }
 
-    public void setDatosReclamacion(List<DatosReclamacion> datosReclamacion) {  this.datosReclamacion = datosReclamacion;   }
+    public void setDatosReclamacion(List<DatosReclamacion> datosReclamacion) {
+        this.datosReclamacion = datosReclamacion;
+    }
 
     @Override
     public String toString() {

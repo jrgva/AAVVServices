@@ -7,7 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface AbrirReclamacionRepository extends MongoRepository<TramitesReclamaciones, String> {
 
-    String createTramiteReclamacion(AbrirRK abrirRK);
 
-    String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
 }
