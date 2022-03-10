@@ -2,11 +2,11 @@ package com.aavvservice.model;
 
 import java.util.List;
 
-public class RealizarGestion {
+public class RealizarActuacionEyPO {
 
     private String documento;
     private String tipoDocumento;
-    private List<DatosGestion> datosGestion;
+    private List<DatosActuacionEyPO> datosActuacionEyPO;
 
     public String getDocumento() {
         return documento;
@@ -24,20 +24,20 @@ public class RealizarGestion {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public List<DatosGestion> getDatosGestion() {
-        return datosGestion;
+    public List<DatosActuacionEyPO> getDatosGestion() {
+        return datosActuacionEyPO;
     }
 
-    public void setDatosGestion(List<DatosGestion> datosGestion) {
-        this.datosGestion = datosGestion;
+    public void setDatosGestion(List<DatosActuacionEyPO> datosActuacionEyPO) {
+        this.datosActuacionEyPO = datosActuacionEyPO;
     }
 
     @Override
     public String toString() {
-        return "realizarGestion{" +
+        return "realizarActuacionnEyPO{" +
                 "documento='" + documento + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
-                ", datosGestion=" + datosGestion +
+                ", datosActuacionEyPO=" + datosActuacionEyPO +
                 '}';
     }
 }

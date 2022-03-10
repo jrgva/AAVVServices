@@ -13,7 +13,7 @@ public class TramitesReclamaciones {
     private String comentarioCliente;
     private String tipoTramite;
     private List<DatosReclamacion> datosReclamacion;
-    private List<DatosGestion> datosGestion;
+    private List<DatosActuacionEyPO> datosActuacionEyPO;
 
     public TramitesReclamaciones() {
     }
@@ -82,12 +82,12 @@ public class TramitesReclamaciones {
         this.datosReclamacion = datosReclamacion;
     }
 
-    public List<DatosGestion> getDatosGestiones() {
-        return datosGestion;
+    public List<DatosActuacionEyPO> getDatosGestiones() {
+        return datosActuacionEyPO;
     }
 
-    public void setDatosGestion(List<DatosGestion> datosGestion) {
-        this.datosGestion = datosGestion;
+    public void setDatosGestion(List<DatosActuacionEyPO> datosActuacionEyPO) {
+        this.datosActuacionEyPO = datosActuacionEyPO;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class TramitesReclamaciones {
                 ", comentarioCliente='" + comentarioCliente + '\'' +
                 ", tipoTramite='" + tipoTramite + '\'' +
                 ", datosReclamacion=" + datosReclamacion +
-                ", datosGestiones=" + datosGestion +
+                ", datosActuacionEyPO=" + datosActuacionEyPO +
                 '}';
     }
 }

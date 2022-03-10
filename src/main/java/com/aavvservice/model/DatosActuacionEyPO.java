@@ -1,13 +1,13 @@
 package com.aavvservice.model;
 
-public class DatosGestion {
+public class DatosActuacionEyPO {
 
     private String linea;
     private String suscripcion;
     private String bloqueo;
     private String baja;
 
-    public DatosGestion() {
+    public DatosActuacionEyPO() {
     }
 
     public String getLinea() {
@@ -44,7 +44,7 @@ public class DatosGestion {
 
     @Override
     public String toString() {
-        return "datosGestion{" +
+        return "datosActuacionEyPO{" +
                 "linea='" + linea + '\'' +
                 ", suscripcion='" + suscripcion + '\'' +
                 ", bloqueo='" + bloqueo + '\'' +
