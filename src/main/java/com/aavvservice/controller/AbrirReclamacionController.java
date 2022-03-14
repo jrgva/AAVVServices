@@ -2,6 +2,7 @@ package com.aavvservice.controller;
 
 import com.aavvservice.model.AbrirRK;
 import com.aavvservice.model.RealizarActuacionEyPO;
+import com.aavvservice.service.AAVVService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AbrirReclamacionController {
     private final Logger logger =
             LoggerFactory.getLogger(AbrirReclamacionController.class);
+
     @Autowired
     private AAVVService aavvService;
 
@@ -35,10 +37,10 @@ public class AbrirReclamacionController {
     }
 
     //@ApiOperation(value = "Obtener un tramite a realizar en ARTE")
-    @RequestMapping(value = "/obtenerTramiteReclamaciones", method = RequestMethod.GET)
+    @RequestMapping(value = "/obtenerTramite", method = RequestMethod.GET)
     public String obtenerTramiteReclamaciones() {
 
-        logger.info("Obtener todos los tramites a realizar");
-        return aavvService.obtenerTramiteReclamaciones();
+        logger.info("Obtener tramite a realizar en ARTE");
+        return aavvService.obtenerTramite();
     }
 }

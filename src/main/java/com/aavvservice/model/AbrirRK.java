@@ -43,7 +43,7 @@ public class AbrirRK {
 
     @Override
     public String toString() {
-        return "abrirRK{" +
+        return "{" +
                 "documento='" + documento + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
                 ", comentarioCliente='" + comentarioCliente + '\'' +

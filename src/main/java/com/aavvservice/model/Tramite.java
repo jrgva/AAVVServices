@@ -3,19 +3,17 @@ package com.aavvservice.model;
 import java.util.Date;
 import java.util.List;
 
-public class TramitesReclamaciones {
+public class Tramite {
 
     private String id;
     private Date fechaCreacion;
     private boolean procesado;
     private String documento;
     private String tipoDocumento;
-    private String comentarioCliente;
     private String tipoTramite;
-    private List<DatosReclamacion> datosReclamacion;
-    private List<DatosActuacionEyPO> datosActuacionEyPO;
+    private Object datosTramite;
 
-    public TramitesReclamaciones() {
+    public Tramite() {
     }
 
     public String getId() {
@@ -58,14 +56,6 @@ public class TramitesReclamaciones {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getComentarioCliente() {
-        return comentarioCliente;
-    }
-
-    public void setComentarioCliente(String comentarioCliente) {
-        this.comentarioCliente = comentarioCliente;
-    }
-
     public String getTipoTramite() {
         return tipoTramite;
     }
@@ -74,34 +64,24 @@ public class TramitesReclamaciones {
         this.tipoTramite = tipoTramite;
     }
 
-    public List<DatosReclamacion> getDatosReclamacion() {
-        return datosReclamacion;
+    public Object getDatosTramite() {
+        return datosTramite;
     }
 
-    public void setDatosReclamacion(List<DatosReclamacion> datosReclamacion) {
-        this.datosReclamacion = datosReclamacion;
-    }
-
-    public List<DatosActuacionEyPO> getDatosGestiones() {
-        return datosActuacionEyPO;
-    }
-
-    public void setDatosGestion(List<DatosActuacionEyPO> datosActuacionEyPO) {
-        this.datosActuacionEyPO = datosActuacionEyPO;
+    public void setDatosTramite(Object datosTramite) {
+        this.datosTramite = datosTramite;
     }
 
     @Override
     public String toString() {
-        return "tramitesReclamaciones{" +
+        return "{" +
                 "id='" + id + '\'' +
                 ", fechaCreacion=" + fechaCreacion +
                 ", procesado=" + procesado +
                 ", documento='" + documento + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
-                ", comentarioCliente='" + comentarioCliente + '\'' +
                 ", tipoTramite='" + tipoTramite + '\'' +
-                ", datosReclamacion=" + datosReclamacion +
-                ", datosActuacionEyPO=" + datosActuacionEyPO +
+                ", datosTramite=" + datosTramite +
                 '}';
     }
 }

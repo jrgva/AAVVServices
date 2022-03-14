@@ -34,7 +34,7 @@ public class RealizarActuacionEyPO {
 
     @Override
     public String toString() {
-        return "realizarActuacionnEyPO{" +
+        return "{" +
                 "documento='" + documento + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
                 ", datosActuacionEyPO=" + datosActuacionEyPO +

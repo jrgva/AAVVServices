@@ -107,7 +107,7 @@ public class DatosReclamacion {
 
     @Override
     public String toString() {
-        return "datosReclamacion{" +
+        return "{" +
                 "factura='" + factura + '\'' +
                 ", linea='" + linea + '\'' +
                 ", concepto=" + concepto + '\'' +

@@ -44,7 +44,7 @@ public class DatosActuacionEyPO {
 
     @Override
     public String toString() {
-        return "datosActuacionEyPO{" +
+        return "{" +
                 "linea='" + linea + '\'' +
                 ", suscripcion='" + suscripcion + '\'' +
                 ", bloqueo='" + bloqueo + '\'' +
