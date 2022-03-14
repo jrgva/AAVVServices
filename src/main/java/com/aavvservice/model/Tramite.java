@@ -1,12 +1,9 @@
 package com.aavvservice.model;
 
-import java.util.Date;
-import java.util.List;
-
 public class Tramite {
 
     private String id;
-    private Date fechaCreacion;
+    private String fechaCreacion;
     private boolean procesado;
     private String documento;
     private String tipoDocumento;
@@ -24,11 +21,11 @@ public class Tramite {
         this.id = id;
     }
 
-    public Date getFechaCreacion() {
+    public String getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -76,7 +73,7 @@ public class Tramite {
     public String toString() {
         return "{" +
                 "id='" + id + '\'' +
-                ", fechaCreacion=" + fechaCreacion +
+                ", fechaCreacion='" + fechaCreacion + '\'' +
                 ", procesado=" + procesado +
                 ", documento='" + documento + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +

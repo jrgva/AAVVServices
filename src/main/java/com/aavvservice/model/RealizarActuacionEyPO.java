@@ -1,10 +1,16 @@
 package com.aavvservice.model;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
+@Validated
 public class RealizarActuacionEyPO {
 
+    @NotBlank(message = "Se requiere el documento del cliente")
     private String documento;
+    @NotBlank(message = "Se requiere el tipo de documento del cliente")
     private String tipoDocumento;
     private List<DatosActuacionEyPO> datosActuacionEyPO;
 

@@ -2,6 +2,7 @@ package com.aavvservice.controller;
 
 import com.aavvservice.model.AbrirRK;
 import com.aavvservice.model.RealizarActuacionEyPO;
+import com.aavvservice.model.Tramite;
 import com.aavvservice.service.AAVVService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 public class AbrirReclamacionController {
@@ -22,15 +25,15 @@ public class AbrirReclamacionController {
     // Operaciones AAVV
     //@ApiOperation(value = "Crear una tarea de abrir una reclamacion en ARTE desde AAVV")
     @RequestMapping(value = "/abrirReclamacion", method = RequestMethod.POST)
-    public String abrirReclamacion(@RequestBody AbrirRK abrirRK) {
+    public String abrirReclamacion(@Valid @RequestBody AbrirRK abrirRK) {
 
         logger.info("Creando tarea para abrir una reclamacion: {}", abrirRK.toString());
         return aavvService.createTramiteReclamacion(abrirRK);
     }
 
     //@ApiOperation(value = "Crear una tarea de realizar una gestion de EyPO en ARTE desde AAVV")
-    @RequestMapping(value = "/realizarGestionEyPO", method = RequestMethod.POST)
-    public String realizarGestionEyPO(@RequestBody RealizarActuacionEyPO realizarActuacionEyPO) {
+    @RequestMapping(value = "/realizarActuacionEyPO", method = RequestMethod.POST)
+    public String realizarGestionEyPO(@Valid @RequestBody RealizarActuacionEyPO realizarActuacionEyPO) {
 
         logger.info("Creando tarea para realizar una actuacion de EyPO: {}", realizarActuacionEyPO.toString());
         return aavvService.createTramiteActuacionEyPO(realizarActuacionEyPO);
@@ -41,6 +44,6 @@ public class AbrirReclamacionController {
     public String obtenerTramiteReclamaciones() {
 
         logger.info("Obtener tramite a realizar en ARTE");
-        return aavvService.obtenerTramite();
+        return aavvService.obtenerTramite().toString();
     }
 }

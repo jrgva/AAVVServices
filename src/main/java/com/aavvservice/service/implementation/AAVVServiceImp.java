@@ -12,7 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 
 @Component("AAVVService")
@@ -29,28 +30,44 @@ public class AAVVServiceImp implements AAVVService {
         this.mongoOperations = mongoOperations;
     }
 
+    private String getCustomId(){
+        Instant instant = Instant.now();
+        String id = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").withZone(ZoneId.from(ZoneOffset.UTC)).format(instant);
+        return id;
+    }
+
     @Override
     public String createTramiteReclamacion(AbrirRK abrirRK) {
-        Date fechaCreacion = new Date();
+        Instant instant = Instant.now();
         Tramite tramite = new Tramite();
+        tramite.setId(getCustomId());
+        tramite.setFechaCreacion(instant.toString());
         tramite.setDocumento(abrirRK.getDocumento());
         tramite.setTipoDocumento(abrirRK.getTipoDocumento());
         tramite.setProcesado(false);
         tramite.setTipoTramite("Reclamacion");
         tramite.setDatosTramite(abrirRK);
-        tramite.setId("idPrueba");
-        tramite.setFechaCreacion(fechaCreacion);
         mongoOperations.insert(tramite, "Tramites");
         return tramite.toString();
     }
 
     @Override
     public String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO) {
-        return null;
+        Instant instant = Instant.now();
+        Tramite tramite = new Tramite();
+        tramite.setId(getCustomId());
+        tramite.setFechaCreacion(instant.toString());
+        tramite.setDocumento(realizarActuacionEyPO.getDocumento());
+        tramite.setTipoDocumento(realizarActuacionEyPO.getTipoDocumento());
+        tramite.setProcesado(false);
+        tramite.setTipoTramite("ActuacionEyPO");
+        tramite.setDatosTramite(realizarActuacionEyPO);
+        mongoOperations.insert(tramite, "Tramites");
+        return tramite.toString();
     }
 
     @Override
-    public String obtenerTramite() {
-        return null;
+    public Tramite obtenerTramite() {
+        return aavvTramites_repository.findOneByProcesadoIsFalse();
     }
 }
