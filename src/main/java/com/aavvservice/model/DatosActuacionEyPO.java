@@ -45,10 +45,10 @@ public class DatosActuacionEyPO {
     @Override
     public String toString() {
         return "{" +
-                "linea='" + linea + '\'' +
-                ", suscripcion='" + suscripcion + '\'' +
-                ", bloqueo='" + bloqueo + '\'' +
-                ", baja='" + baja + '\'' +
-                '}';
+                "\"linea\":\"" + linea + "\"," +
+                "\"suscripcion\":\"" + suscripcion + "\"," +
+                "\"bloqueo\":\"" + bloqueo + "\"," +
+                "\"baja\":\"" + baja + "\"" +
+                "}";
     }
 }

@@ -1,14 +1,15 @@
 package com.aavvservice.service.implementation;
 
-import com.aavvservice.model.AbrirRK;
-import com.aavvservice.model.RealizarActuacionEyPO;
-import com.aavvservice.model.Tramite;
+import com.aavvservice.model.*;
 import com.aavvservice.repository.AAVVTramitesRepository;
 import com.aavvservice.service.AAVVService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component("AAVVService")
@@ -38,7 +41,7 @@ public class AAVVServiceImp implements AAVVService {
     }
 
     @Override
-    public String createTramiteReclamacion(AbrirRK abrirRK) {
+    public Tramite createTramiteReclamacion(AbrirRK abrirRK) {
         Instant instant = Instant.now();
         Tramite tramite = new Tramite();
         tramite.setId(getCustomId());
@@ -49,11 +52,11 @@ public class AAVVServiceImp implements AAVVService {
         tramite.setTipoTramite("Reclamacion");
         tramite.setDatosTramite(abrirRK);
         mongoOperations.insert(tramite, "Tramites");
-        return tramite.toString();
+        return tramite;
     }
 
     @Override
-    public String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO) {
+    public Tramite createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO) {
         Instant instant = Instant.now();
         Tramite tramite = new Tramite();
         tramite.setId(getCustomId());
@@ -64,16 +67,31 @@ public class AAVVServiceImp implements AAVVService {
         tramite.setTipoTramite("ActuacionEyPO");
         tramite.setDatosTramite(realizarActuacionEyPO);
         mongoOperations.insert(tramite, "Tramites");
-        return tramite.toString();
+        return tramite;
     }
 
     @Override
-    public String obtenerTramiteARealizar() {
-        return aavvTramites_repository.findFirstByProcesadoIsFalse().toString();
+    public Tramite obtenerTramiteARealizar() {
+        if (aavvTramites_repository.existsByProcesadoIsFalse()) {
+            Tramite tramite = aavvTramites_repository.findFirstByProcesadoIsFalse();
+            Query query = new Query(Criteria.where("id").is(tramite.getId()));
+            Update update = new Update();
+            update.set("procesado", true);
+            mongoOperations.updateFirst(query, update, Tramite.class);
+            return tramite;
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public String obtenerTramite(String Id) {
-        return aavvTramites_repository.findOneById(Id).toString();
+    public Tramite obtenerTramite(String Id) {
+        return aavvTramites_repository.findOneById(Id);
     }
+
+    @Override
+    public Tramite createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tramite) {
+        return null;
+    }
+
 }

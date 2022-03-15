@@ -1,17 +1,17 @@
 package com.aavvservice.service;
 
-import com.aavvservice.model.AbrirRK;
-import com.aavvservice.model.RealizarActuacionEyPO;
-import com.aavvservice.model.Tramite;
+import com.aavvservice.model.*;
 import org.springframework.stereotype.Service;
 
 @Service("AAVVService")
 public interface AAVVService {
-    public String createTramiteReclamacion(AbrirRK abrirRK);
+    public Tramite createTramiteReclamacion(AbrirRK abrirRK);
 
-    public String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
+    public Tramite createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
 
-    public String obtenerTramiteARealizar();
+    public Tramite obtenerTramiteARealizar();
 
-    public String obtenerTramite(String Id);
+    public Tramite obtenerTramite(String Id);
+
+    Tramite createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tramite);
 }

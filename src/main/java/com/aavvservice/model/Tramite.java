@@ -75,13 +75,13 @@ public class Tramite {
     @Override
     public String toString() {
         return "{" +
-                "id='" + id + '\'' +
-                ", fechaCreacion='" + fechaCreacion + '\'' +
-                ", procesado=" + procesado +
-                ", documento='" + documento + '\'' +
-                ", tipoDocumento='" + tipoDocumento + '\'' +
-                ", tipoTramite='" + tipoTramite + '\'' +
-                ", datosTramite=" + datosTramite +
-                '}';
+                "\"id\":\"" + id + "\"," +
+                "\"fechaCreacion\":\"" + fechaCreacion + "\"," +
+                "\"procesado\":" + procesado + "," +
+                "\"documento\":\"" + documento + "\"," +
+                "\"tipoDocumento\":\"" + tipoDocumento + "\"," +
+                "\"tipoTramite\":\"" + tipoTramite + "\"," +
+                "\"datosTramite\":" + datosTramite.toString() +
+                "}";
     }
 }

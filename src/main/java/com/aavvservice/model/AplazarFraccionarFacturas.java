@@ -3,19 +3,16 @@ package com.aavvservice.model;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
 
 @Validated
-public class AbrirRK {
+public class AplazarFraccionarFacturas {
     @NotBlank(message = "Se requiere el documento del cliente")
     private String documento;
     @NotBlank(message = "Se requiere el tipo de documento del cliente")
     private String tipoDocumento;
-    @Size(min = 0, max = 1500, message = "El comentario de cliente no puede exceder los 1500 caracteres")
-    private String comentarioCliente;
-    private List<DatosReclamacion> datosReclamacion;
+    private List<String> listaFacturas;
 
     public String getDocumento() {
         return documento;
@@ -33,20 +30,12 @@ public class AbrirRK {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getComentarioCliente() {
-        return comentarioCliente;
+    public List<String> getListaFacturas() {
+        return listaFacturas;
     }
 
-    public void setComentarioCliente(String comentarioCliente) {
-        this.comentarioCliente = comentarioCliente;
-    }
-
-    public List<DatosReclamacion> getDatosReclamacion() {
-        return datosReclamacion;
-    }
-
-    public void setDatosReclamacion(List<DatosReclamacion> datosReclamacion) {
-        this.datosReclamacion = datosReclamacion;
+    public void setListaFacturas(List<String> listaFacturas) {
+        this.listaFacturas = listaFacturas;
     }
 
     @Override
@@ -54,8 +43,7 @@ public class AbrirRK {
         return "{" +
                 "\"documento\":\"" + documento + "\"," +
                 "\"tipoDocumento\":\"" + tipoDocumento + "\"," +
-                "\"comentarioCliente\":\"" + comentarioCliente + "\"," +
-                "\"datosReclamacion\":" + Arrays.toString(datosReclamacion.toArray()) +
+                "\"listaFacturas\":" + Arrays.toString(listaFacturas.toArray()) +
                 "}";
     }
 }

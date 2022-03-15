@@ -3,6 +3,7 @@ package com.aavvservice.model;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Arrays;
 import java.util.List;
 
 @Validated
@@ -30,20 +31,20 @@ public class RealizarActuacionEyPO {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public List<DatosActuacionEyPO> getDatosGestion() {
+    public List<DatosActuacionEyPO> getDatosActuacionEyPO() {
         return datosActuacionEyPO;
     }
 
-    public void setDatosGestion(List<DatosActuacionEyPO> datosActuacionEyPO) {
+    public void setDatosActuacionEyPO(List<DatosActuacionEyPO> datosActuacionEyPO) {
         this.datosActuacionEyPO = datosActuacionEyPO;
     }
 
     @Override
     public String toString() {
         return "{" +
-                "documento='" + documento + '\'' +
-                ", tipoDocumento='" + tipoDocumento + '\'' +
-                ", datosActuacionEyPO=" + datosActuacionEyPO +
-                '}';
+                "\"documento\":\"" + documento + "\"," +
+                "\"tipoDocumento\":\"" + tipoDocumento + "\"," +
+                "\"datosActuacionEyPO\":" + Arrays.toString(datosActuacionEyPO.toArray()) +
+                "}";
     }
 }

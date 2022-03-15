@@ -108,17 +108,17 @@ public class DatosReclamacion {
     @Override
     public String toString() {
         return "{" +
-                "factura='" + factura + '\'' +
-                ", linea='" + linea + '\'' +
-                ", concepto=" + concepto + '\'' +
-                ", motivo='" + motivo + '\'' +
-                ", submotivo='" + submotivo + '\'' +
-                ", importe='" + importe + '\'' +
-                ", EyPO=" + EyPO +
-                ", suscripcion='" + suscripcion + '\'' +
-                ", bloqueo='" + bloqueo + '\'' +
-                ", baja='" + baja + '\'' +
-                ", devolucion='" + devolucion + '\'' +
-                '}';
+                "\"factura\":\"" + factura + "\"," +
+                "\"linea\":\"" + linea + "\"," +
+                "\"concepto\":\"" + concepto + "\"," +
+                "\"motivo\":\"" + motivo + "\"," +
+                "\"submotivo\":\"" + submotivo + "\"," +
+                "\"importe\":\"" + importe + "\"," +
+                "\"EyPO\":" + EyPO + "," +
+                "\"suscripcion\":\"" + suscripcion + "\"," +
+                "\"bloqueo\":\"" + bloqueo + "\"," +
+                "\"baja\":\"" + baja + "\"," +
+                "\"devolucion\":\"" + devolucion + "\"" +
+                "}";
     }
 }
