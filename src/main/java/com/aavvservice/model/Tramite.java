@@ -1,5 +1,8 @@
 package com.aavvservice.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Tramites")
 public class Tramite {
 
     private String id;

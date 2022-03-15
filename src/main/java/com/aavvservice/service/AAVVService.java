@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service("AAVVService")
 public interface AAVVService {
-    String createTramiteReclamacion(AbrirRK abrirRK);
+    public String createTramiteReclamacion(AbrirRK abrirRK);
 
-    String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
+    public String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
 
-    Tramite obtenerTramite();
+    public String obtenerTramiteARealizar();
+
+    public String obtenerTramite(String Id);
 }

@@ -5,14 +5,16 @@ import com.aavvservice.model.RealizarActuacionEyPO;
 import com.aavvservice.model.Tramite;
 import com.aavvservice.repository.AAVVTramitesRepository;
 import com.aavvservice.service.AAVVService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 
@@ -30,10 +32,9 @@ public class AAVVServiceImp implements AAVVService {
         this.mongoOperations = mongoOperations;
     }
 
-    private String getCustomId(){
+    private String getCustomId() {
         Instant instant = Instant.now();
-        String id = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").withZone(ZoneId.from(ZoneOffset.UTC)).format(instant);
-        return id;
+        return DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").withZone(ZoneId.from(ZoneOffset.UTC)).format(instant);
     }
 
     @Override
@@ -67,7 +68,12 @@ public class AAVVServiceImp implements AAVVService {
     }
 
     @Override
-    public Tramite obtenerTramite() {
-        return aavvTramites_repository.findOneByProcesadoIsFalse();
+    public String obtenerTramiteARealizar() {
+        return aavvTramites_repository.findFirstByProcesadoIsFalse().toString();
+    }
+
+    @Override
+    public String obtenerTramite(String Id) {
+        return aavvTramites_repository.findOneById(Id).toString();
     }
 }
