@@ -37,14 +37,14 @@ public class AAVVController {
     @PostMapping(value = "/aplazarFacturas")
     public Tramite aplazarFacturas(@Valid @RequestBody AplazarFraccionarFacturas aplazarFraccionarFacturas) {
         logger.info("Crear una tarea de realizar un aplazamiento de facturas: {}", aplazarFraccionarFacturas.toString());
-        return aavvService.createTramiteAplazarFraccionarFacturas(aplazarFraccionarFacturas, "Aplazar");
+        return aavvService.createTramiteAplazarFraccionarFacturas(aplazarFraccionarFacturas, "Aplazamiento");
     }
 
     //@ApiOperation(value = "Crear una tarea de realizar un fraccionamiento de facturas en ARTE desde AAVV")
     @PostMapping(value = "/fraccionarFacturas")
     public Tramite fraccionarFacturas(@Valid @RequestBody AplazarFraccionarFacturas aplazarFraccionarFacturas) {
         logger.info("Creando tarea para realizar un fraccionamiento de facturas: {}", aplazarFraccionarFacturas.toString());
-        return aavvService.createTramiteAplazarFraccionarFacturas(aplazarFraccionarFacturas, "Fraccionar");
+        return aavvService.createTramiteAplazarFraccionarFacturas(aplazarFraccionarFacturas, "Fraccionamiento");
     }
 
     //@ApiOperation(value = "Obtener un tramite a realizar en ARTE")
@@ -59,11 +59,5 @@ public class AAVVController {
     public Tramite obtenerTramite(@PathVariable("id") String Id) {
         logger.info("Obtener tramite a realizar en ARTE");
         return aavvService.obtenerTramite(Id);
-    }
-
-    //@ApiOperation(value = "Obtener un tramite a realizar en ARTE")
-    @GetMapping(value = "/prueba")
-    public String hostname() {
-        return aavvService.obtenerHostname();
     }
 }

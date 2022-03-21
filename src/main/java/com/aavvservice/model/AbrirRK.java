@@ -9,6 +9,8 @@ import java.util.List;
 
 @Validated
 public class AbrirRK {
+
+    private String tsAAVV;
     @NotBlank(message = "Se requiere el documento del cliente")
     private String documento;
     @NotBlank(message = "Se requiere el tipo de documento del cliente")
@@ -16,6 +18,14 @@ public class AbrirRK {
     @Size(min = 0, max = 1500, message = "El comentario de cliente no puede exceder los 1500 caracteres")
     private String comentarioCliente;
     private List<DatosReclamacion> datosReclamacion;
+
+    public String getTsAAVV() {
+        return tsAAVV;
+    }
+
+    public void setTsAAVV(String tsAAVV) {
+        this.tsAAVV = tsAAVV;
+    }
 
     public String getDocumento() {
         return documento;
@@ -52,10 +62,13 @@ public class AbrirRK {
     @Override
     public String toString() {
         return "{" +
+                "\"tsAAVV\":\"" + tsAAVV + "\"," +
                 "\"documento\":\"" + documento + "\"," +
                 "\"tipoDocumento\":\"" + tipoDocumento + "\"," +
                 "\"comentarioCliente\":\"" + comentarioCliente + "\"," +
                 "\"datosReclamacion\":" + Arrays.toString(datosReclamacion.toArray()) +
                 "}";
     }
+
+
 }
