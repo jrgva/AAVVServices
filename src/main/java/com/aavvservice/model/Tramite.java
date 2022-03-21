@@ -2,14 +2,14 @@ package com.aavvservice.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Tramites")
+@Document(collection = "TramitesPendientes")
 public class Tramite {
 
     private String id;
-    private String fechaCreacion;
-    private boolean procesado;
-    private String documento;
-    private String tipoDocumento;
+    private String tsAAVV;
+    private String tsInsertPending;
+    private String tsInsertCompleted;
+    private String pagename;
     private String tipoTramite;
     private Object datosTramite;
 
@@ -24,36 +24,36 @@ public class Tramite {
         this.id = id;
     }
 
-    public String getFechaCreacion() {
-        return fechaCreacion;
+    public String getTsAAVV() {
+        return tsAAVV;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setTsAAVV(String tsAAVV) {
+        this.tsAAVV = tsAAVV;
     }
 
-    public boolean isProcesado() {
-        return procesado;
+    public String getTsInsertPending() {
+        return tsInsertPending;
     }
 
-    public void setProcesado(boolean procesado) {
-        this.procesado = procesado;
+    public void setTsInsertPending(String tsInsertPending) {
+        this.tsInsertPending = tsInsertPending;
     }
 
-    public String getDocumento() {
-        return documento;
+    public String getTsInsertCompleted() {
+        return tsInsertCompleted;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setTsInsertCompleted(String tsInsertCompleted) {
+        this.tsInsertCompleted = tsInsertCompleted;
     }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
+    public String getPagename() {
+        return pagename;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+    public void setPagename(String pagename) {
+        this.pagename = pagename;
     }
 
     public String getTipoTramite() {
@@ -76,10 +76,10 @@ public class Tramite {
     public String toString() {
         return "{" +
                 "\"id\":\"" + id + "\"," +
-                "\"fechaCreacion\":\"" + fechaCreacion + "\"," +
-                "\"procesado\":" + procesado + "," +
-                "\"documento\":\"" + documento + "\"," +
-                "\"tipoDocumento\":\"" + tipoDocumento + "\"," +
+                "\"tsAAVV\":\"" + tsAAVV + "\"," +
+                "\"tsInsertPending\":" + tsInsertPending + "," +
+                "\"tsInsertCompleted\":\"" + tsInsertCompleted + "\"," +
+                "\"pagename\":\"" + pagename + "\"," +
                 "\"tipoTramite\":\"" + tipoTramite + "\"," +
                 "\"datosTramite\":" + datosTramite.toString() +
                 "}";

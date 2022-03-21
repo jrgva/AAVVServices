@@ -14,4 +14,6 @@ public interface AAVVService {
     public Tramite obtenerTramite(String Id);
 
     Tramite createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tramite);
+
+    String obtenerHostname();
 }

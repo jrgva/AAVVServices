@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -37,7 +39,18 @@ public class AAVVServiceImp implements AAVVService {
 
     private String getCustomId() {
         Instant instant = Instant.now();
-        return DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").withZone(ZoneId.from(ZoneOffset.UTC)).format(instant);
+        String ts = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").withZone(ZoneId.from(ZoneOffset.UTC)).format(instant);
+        String hostName;
+        try {
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            hostName = "GenericHostName";
+        }
+        return ts + "_" + hostName;
+    }
+
+    private String getTs(){
+
     }
 
     @Override
@@ -45,10 +58,6 @@ public class AAVVServiceImp implements AAVVService {
         Instant instant = Instant.now();
         Tramite tramite = new Tramite();
         tramite.setId(getCustomId());
-        tramite.setFechaCreacion(instant.toString());
-        tramite.setDocumento(abrirRK.getDocumento());
-        tramite.setTipoDocumento(abrirRK.getTipoDocumento());
-        tramite.setProcesado(false);
         tramite.setTipoTramite("Reclamacion");
         tramite.setDatosTramite(abrirRK);
         mongoOperations.insert(tramite, "Tramites");
@@ -60,10 +69,6 @@ public class AAVVServiceImp implements AAVVService {
         Instant instant = Instant.now();
         Tramite tramite = new Tramite();
         tramite.setId(getCustomId());
-        tramite.setFechaCreacion(instant.toString());
-        tramite.setDocumento(realizarActuacionEyPO.getDocumento());
-        tramite.setTipoDocumento(realizarActuacionEyPO.getTipoDocumento());
-        tramite.setProcesado(false);
         tramite.setTipoTramite("ActuacionEyPO");
         tramite.setDatosTramite(realizarActuacionEyPO);
         mongoOperations.insert(tramite, "Tramites");
@@ -72,16 +77,7 @@ public class AAVVServiceImp implements AAVVService {
 
     @Override
     public Tramite obtenerTramiteARealizar() {
-        if (aavvTramites_repository.existsByProcesadoIsFalse()) {
-            Tramite tramite = aavvTramites_repository.findFirstByProcesadoIsFalse();
-            Query query = new Query(Criteria.where("id").is(tramite.getId()));
-            Update update = new Update();
-            update.set("procesado", true);
-            mongoOperations.updateFirst(query, update, Tramite.class);
-            return tramite;
-        } else {
             return null;
-        }
     }
 
     @Override
@@ -92,6 +88,15 @@ public class AAVVServiceImp implements AAVVService {
     @Override
     public Tramite createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tramite) {
         return null;
+    }
+
+    @Override
+    public String obtenerHostname() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            return "ERROR";
+        }
     }
 
 }

@@ -60,4 +60,10 @@ public class AAVVController {
         logger.info("Obtener tramite a realizar en ARTE");
         return aavvService.obtenerTramite(Id);
     }
+
+    //@ApiOperation(value = "Obtener un tramite a realizar en ARTE")
+    @GetMapping(value = "/prueba")
+    public String hostname() {
+        return aavvService.obtenerHostname();
+    }
 }
