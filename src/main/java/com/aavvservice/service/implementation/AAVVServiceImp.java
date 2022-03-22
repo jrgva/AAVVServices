@@ -85,7 +85,7 @@ public class AAVVServiceImp implements AAVVService {
 
     @Override
     public Tramite createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO) {
-        Tramite tramite = insertTramitePendiente(realizarActuacionEyPO, "Reclamacion", realizarActuacionEyPO.getTsAAVV());
+        Tramite tramite = insertTramitePendiente(realizarActuacionEyPO, "ActuacionEyPO", realizarActuacionEyPO.getTsAAVV());
         return tramite;
     }
 
