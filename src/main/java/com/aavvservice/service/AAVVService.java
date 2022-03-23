@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 @Service("AAVVService")
 public interface AAVVService {
 
-    public Tramite createTramiteReclamacion(AbrirRK abrirRK);
+    public String createTramiteReclamacion(AbrirRK abrirRK);
 
-    public Tramite createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
+    public String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO);
 
-    public Tramite obtenerTramiteARealizar();
+    public Object obtenerTramiteARealizar();
 
-    public Tramite obtenerTramite(String Id);
+    public Object obtenerTramite(String Id);
 
-    Tramite createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tipoTramite);
+    String createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tipoTramite);
 
 }

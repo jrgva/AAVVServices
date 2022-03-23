@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -63,7 +64,7 @@ public class AAVVServiceImp implements AAVVService {
         return instant.toString();
     }
 
-    private Tramite insertTramitePendiente(Object body, String tipoTramite, String tsAAVV){
+    private String insertTramitePendiente(Object body, String tipoTramite, String tsAAVV){
         Tramite tramite = new Tramite();
         tramite.setId(getId());
         tramite.setTsAAVV(tsAAVV);
@@ -71,45 +72,50 @@ public class AAVVServiceImp implements AAVVService {
         tramite.setTipoTramite(tipoTramite);
         tramite.setPagename(tramitePagename.get(tipoTramite));
         tramite.setDatosTramite(body);
-        // CONTROL DE EXCEPCIONES
         mongoOperations.insert(tramite, "TramitesPendientes");
-        // DEVOLVER OK O KO EN FORMATO JSON
-        return tramite;
+        return "{\"message\":\"La tarea se ha añadido correctamente\"}";
     }
 
     @Override
-    public Tramite createTramiteReclamacion(AbrirRK abrirRK) {
-        Tramite tramite = insertTramitePendiente(abrirRK, "Reclamacion", abrirRK.getTsAAVV());
-        return tramite;
+    public String createTramiteReclamacion(AbrirRK abrirRK) {
+        String result = insertTramitePendiente(abrirRK, "Reclamacion", abrirRK.getTsAAVV());
+        return result;
     }
 
     @Override
-    public Tramite createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO) {
-        Tramite tramite = insertTramitePendiente(realizarActuacionEyPO, "ActuacionEyPO", realizarActuacionEyPO.getTsAAVV());
-        return tramite;
+    public String createTramiteActuacionEyPO(RealizarActuacionEyPO realizarActuacionEyPO) {
+        String result = insertTramitePendiente(realizarActuacionEyPO, "ActuacionEyPO", realizarActuacionEyPO.getTsAAVV());
+        return result;
     }
 
     @Override
-    public Tramite createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tipoTramite) {
-        Tramite tramite = insertTramitePendiente(aplazarFraccionarFacturas, tipoTramite, aplazarFraccionarFacturas.getTsAAVV());
-        return tramite;
+    public String createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tipoTramite) {
+        String result = insertTramitePendiente(aplazarFraccionarFacturas, tipoTramite, aplazarFraccionarFacturas.getTsAAVV());
+        return result;
     }
 
     @Override
-    public Tramite obtenerTramiteARealizar() {
-        // CONTROL DE EXCEPCIONES
+    public Object obtenerTramiteARealizar() {
         Tramite tramite = mongoOperations.findOne(findFirstOne, Tramite.class);
+        if (tramite == null)
+        {
+            return "{\"message\":\"No hay tramites a realizar\"}";
+        }
         Query searchQuery = new Query(Criteria.where("id").is(tramite.getId()));
         mongoOperations.remove(searchQuery, Tramite.class, "TramitesPendientes");
         tramite.setTsInsertCompleted(getTs());
         mongoOperations.insert(tramite, "TramitesCompletados");
-        // DEVOLVER QUE NO HAY NADA SI NO LO HAY
         return tramite;
     }
 
     @Override
-    public Tramite obtenerTramite(String Id) {
-        // DEVOLVER QUE NO HAY NADA SI NO LO HAY
-        return aavvTramites_repository.findOneById(Id);
+    public Object obtenerTramite(String Id) {
+        Tramite tramite = aavvTramites_repository.findOneById(Id);
+        if(tramite == null)
+        {
+            return "{\"message\":\"No hay tramites a realizar\"}";
+        }
+        return tramite;
+
     }
 }
