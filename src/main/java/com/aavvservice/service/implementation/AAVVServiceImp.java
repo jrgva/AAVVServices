@@ -73,8 +73,13 @@ public class AAVVServiceImp implements AAVVService {
         tramite.setTipoTramite(tipoTramite);
         tramite.setPagename(tramitePagename.get(tipoTramite));
         tramite.setDatosTramite(body);
-        mongoOperations.insert(tramite, "TramitesPendientes");
-        return "{\"message\":\"La tarea se ha añadido correctamente\"}";
+        try {
+            mongoOperations.insert(tramite, "TramitesPendientes");
+        }
+        catch(Exception e){
+            return "Ha ocurrido un error al insertar el tramite pendiente en Mongo";
+        }
+        return "El tramite se ha insertado correctamente";
     }
 
     @Override
@@ -99,12 +104,22 @@ public class AAVVServiceImp implements AAVVService {
     public Object obtenerTramiteARealizar() {
         Tramite tramite = mongoOperations.findOne(findFirstOne, Tramite.class);
         if (tramite == null) {
-            return "{\"message\":\"No hay tramites a realizar\"}";
+            return "No hay tramites pendientes";
         }
         Query searchQuery = new Query(Criteria.where("id").is(tramite.getId()));
-        mongoOperations.remove(searchQuery, Tramite.class, "TramitesPendientes");
+        try {
+            mongoOperations.remove(searchQuery, Tramite.class, "TramitesPendientes");
+        }
+        catch(Exception e){
+            return "Ha ocurrido un error al borrar el trámite pendiente";
+        }
         tramite.setTsInsertCompleted(getTs());
-        mongoOperations.insert(tramite, "TramitesCompletados");
+        try {
+            mongoOperations.insert(tramite, "TramitesCompletados");
+        }
+        catch(Exception e){
+            return "Ha ocurrido un error al insertar el tramite completado en Mongo";
+        }
         return tramite;
     }
 
@@ -112,7 +127,7 @@ public class AAVVServiceImp implements AAVVService {
     public Object obtenerTramite(String Id) {
         Tramite tramite = aavvTramites_repository.findOneById(Id);
         if (tramite == null) {
-            return "{\"message\":\"No hay tramites a realizar\"}";
+            return "No se ha encontrado ningun tramite con ese id";
         }
         return tramite;
     }
