@@ -26,16 +26,16 @@ import java.util.HashMap;
 
 @Component("AAVVService")
 @Transactional
-public class AAVVServiceImp implements AAVVService {
+public class AAVVServiceImpl implements AAVVService {
 
     private static final Query findFirstOne = new Query().limit(1);
-    private final Logger logger = LoggerFactory.getLogger(AAVVServiceImp.class);
+    private final Logger logger = LoggerFactory.getLogger(AAVVServiceImpl.class);
     private AAVVTramitesRepository aavvTramites_repository;
     private MongoOperations mongoOperations;
     private HashMap<String, String> tramitePagename = new HashMap<>();
 
     @Autowired
-    public AAVVServiceImp(AAVVTramitesRepository aavvTramites_repositorytory, MongoOperations mongoOperations) {
+    public AAVVServiceImpl(AAVVTramitesRepository aavvTramites_repositorytory, MongoOperations mongoOperations) {
         this.aavvTramites_repository = aavvTramites_repositorytory;
         this.mongoOperations = mongoOperations;
         populateMap();
