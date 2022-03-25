@@ -1,6 +1,9 @@
 package com.aavvservice.service.implementation;
 
-import com.aavvservice.model.*;
+import com.aavvservice.model.AbrirRK;
+import com.aavvservice.model.AplazarFraccionarFacturas;
+import com.aavvservice.model.RealizarActuacionEyPO;
+import com.aavvservice.model.Tramite;
 import com.aavvservice.repository.AAVVTramitesRepository;
 import com.aavvservice.service.AAVVService;
 import org.slf4j.Logger;
@@ -18,7 +21,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -26,8 +28,8 @@ import java.util.HashMap;
 @Transactional
 public class AAVVServiceImp implements AAVVService {
 
-    private final Logger logger = LoggerFactory.getLogger(AAVVServiceImp.class);
     private static final Query findFirstOne = new Query().limit(1);
+    private final Logger logger = LoggerFactory.getLogger(AAVVServiceImp.class);
     private AAVVTramitesRepository aavvTramites_repository;
     private MongoOperations mongoOperations;
     private HashMap<String, String> tramitePagename = new HashMap<>();
@@ -39,12 +41,11 @@ public class AAVVServiceImp implements AAVVService {
         populateMap();
     }
 
-    private void populateMap()
-    {
-        tramitePagename.put("Reclamacion","101_Reclamacion_AAVV");
-        tramitePagename.put("ActuacionEyPO","101_ActuacionEyPO_AAVV");
-        tramitePagename.put("Fraccionamiento","104_Fraccionamiento_AAVV");
-        tramitePagename.put("Aplazamiento","104_Aplazamiento_AAVV");
+    private void populateMap() {
+        tramitePagename.put("Reclamacion", "101_Reclamacion_AAVV");
+        tramitePagename.put("ActuacionEyPO", "101_ActuacionEyPO_AAVV");
+        tramitePagename.put("Fraccionamiento", "104_Fraccionamiento_AAVV");
+        tramitePagename.put("Aplazamiento", "104_Aplazamiento_AAVV");
     }
 
     private String getId() {
@@ -59,12 +60,12 @@ public class AAVVServiceImp implements AAVVService {
         return ts + "_" + hostName;
     }
 
-    private String getTs(){
+    private String getTs() {
         Instant instant = Instant.now();
         return instant.toString();
     }
 
-    private String insertTramitePendiente(Object body, String tipoTramite, String tsAAVV){
+    private String insertTramitePendiente(Object body, String tipoTramite, String tsAAVV) {
         Tramite tramite = new Tramite();
         tramite.setId(getId());
         tramite.setTsAAVV(tsAAVV);
@@ -97,8 +98,7 @@ public class AAVVServiceImp implements AAVVService {
     @Override
     public Object obtenerTramiteARealizar() {
         Tramite tramite = mongoOperations.findOne(findFirstOne, Tramite.class);
-        if (tramite == null)
-        {
+        if (tramite == null) {
             return "{\"message\":\"No hay tramites a realizar\"}";
         }
         Query searchQuery = new Query(Criteria.where("id").is(tramite.getId()));
@@ -111,11 +111,9 @@ public class AAVVServiceImp implements AAVVService {
     @Override
     public Object obtenerTramite(String Id) {
         Tramite tramite = aavvTramites_repository.findOneById(Id);
-        if(tramite == null)
-        {
+        if (tramite == null) {
             return "{\"message\":\"No hay tramites a realizar\"}";
         }
         return tramite;
-
     }
 }
