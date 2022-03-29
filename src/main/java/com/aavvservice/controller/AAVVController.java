@@ -2,6 +2,7 @@ package com.aavvservice.controller;
 
 import com.aavvservice.model.AbrirRK;
 import com.aavvservice.model.AplazarFraccionarFacturas;
+import com.aavvservice.model.ConsultaSincrona;
 import com.aavvservice.model.RealizarActuacionEyPO;
 import com.aavvservice.service.AAVVService;
 import org.slf4j.Logger;
@@ -63,4 +64,24 @@ public class AAVVController {
         return aavvService.obtenerTramite(Id);
     }
 
+    //@ApiOperation(value = "Obtener una consulta sincrona realizada en ARTE")
+    @GetMapping(value = "/obtenerConsultaSincrona/{collection}/{id}")
+    public Object obtenerConsultaSincrona(@PathVariable("collection") String collection, @PathVariable("id") String Id) {
+        logger.info("Obtener una consulta sincrona realizada en ARTE");
+        return aavvService.obtenerConsultaSincrona(collection, Id);
+    }
+
+    //@ApiOperation(value = "Crear una consulta en la BBDD de Mongo")
+    @PostMapping(value = "/crearConsulta")
+    public String crearConsulta(@Valid @RequestBody ConsultaSincrona consulta) {
+        logger.info("Creando consulta en Mongo: {}", consulta.toString());
+        return aavvService.crearConsulta(consulta);
+    }
+
+    //@ApiOperation(value = "Actualiza una consulta en la BBDD de Mongo")
+    @PostMapping(value = "/actualizarConsulta")
+    public String actualizarConsulta(@Valid @RequestBody ConsultaSincrona consulta) {
+        logger.info("Actualizando  consulta {} en Mongo: {}", consulta.getId(), consulta.toString());
+        return aavvService.actualizarConsulta(consulta);
+    }
 }
