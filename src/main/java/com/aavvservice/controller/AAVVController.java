@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("aavv")
+//@Api(value = "AAVV Controller", description = "Operations pertaining to AAVVs.")
 public class AAVVController {
     private final Logger logger =
             LoggerFactory.getLogger(AAVVController.class);
@@ -21,7 +22,14 @@ public class AAVVController {
     @Autowired
     private AAVVService aavvService;
 
-    // Operaciones AAVV
+    /*@ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )*/
+
     //@ApiOperation(value = "Crear una tarea de abrir una reclamacion en ARTE desde AAVV")
     @PostMapping(value = "/abrirReclamacion")
     public String abrirReclamacion(@Valid @RequestBody AbrirRK abrirRK) {
@@ -64,7 +72,7 @@ public class AAVVController {
         return aavvService.obtenerTramite(Id);
     }
 
-    //@ApiOperation(value = "Obtener una sincrona realizada en ARTE")
+    //@ApiOperation(value = "Obtener el resultado de una consulta realizada en ARTE")
     @GetMapping(value = "/obtenerResultadoConsulta/{collection}/{id}")
     public Object obtenerResultadoConsulta(@PathVariable("collection") String collection, @PathVariable("id") String Id) {
         logger.info("Obtener el resultado de una consulta realizada a ARTE");

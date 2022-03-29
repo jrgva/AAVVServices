@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AplazarFraccionarFacturas {
 
-    @Pattern(regexp = "(19|20)[0-9][0-9]-(0[0-9]|1[0-2])-(0[1-9]|([12][0-9]|3[01]))T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]:[0-9][0-9][0-9]Z", message = "tsAAVV tiene que estar en el formato yyyy-MM-ddThh:mm:ss:SSSZ")
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z", message = "tsAAVV tiene que estar en el formato yyyy-MM-ddThh:mm:ss:SSSZ")
     private String tsAAVV;
     @NotBlank(message = "Se requiere el documento del cliente")
     private String documento;
