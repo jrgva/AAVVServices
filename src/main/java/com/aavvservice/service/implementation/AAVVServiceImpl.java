@@ -143,7 +143,7 @@ public class AAVVServiceImpl implements AAVVService {
     }
 
     @Override
-    public String crearConsulta(ConsultaSincrona consulta) {
+    public Object crearConsulta(ConsultaSincrona consulta) {
         consulta.setTsInsert(getTs());
         consulta.setTsLastUpdate(getTs());
         Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
@@ -159,8 +159,7 @@ public class AAVVServiceImpl implements AAVVService {
             return "La consulta se ha insertado correctamente";
         }
         else { // Update
-            actualizarConsulta(consulta);
-            return "La consulta se ha actualizado correctamente";
+            return consultaResult;
         }
     }
 

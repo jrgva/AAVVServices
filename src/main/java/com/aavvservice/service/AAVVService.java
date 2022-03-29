@@ -21,7 +21,7 @@ public interface AAVVService {
 
     public Object obtenerConsultaSincrona(String collection, String Id);
 
-    public String crearConsulta(ConsultaSincrona consulta);
+    public Object crearConsulta(ConsultaSincrona consulta);
 
     public String actualizarConsulta(ConsultaSincrona consulta);
 

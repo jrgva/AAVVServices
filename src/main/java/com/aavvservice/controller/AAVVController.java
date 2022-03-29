@@ -73,7 +73,7 @@ public class AAVVController {
 
     //@ApiOperation(value = "Crear una consulta en la BBDD de Mongo")
     @PostMapping(value = "/crearConsulta")
-    public String crearConsulta(@Valid @RequestBody ConsultaSincrona consulta) {
+    public Object crearConsulta(@Valid @RequestBody ConsultaSincrona consulta) {
         logger.info("Creando consulta en Mongo: {}", consulta.toString());
         return aavvService.crearConsulta(consulta);
     }
