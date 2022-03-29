@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -133,9 +132,9 @@ public class AAVVServiceImpl implements AAVVService {
     }
 
     @Override
-    public Object obtenerConsultaSincrona(String collection, String Id) {
+    public Object obtenerResultadoConsulta(String collection, String Id) {
         Query searchQuery = new Query(Criteria.where("_id").is(Id));
-        ConsultaSincrona consulta = mongoOperations.findOne(searchQuery,ConsultaSincrona.class, collection);
+        Consulta consulta = mongoOperations.findOne(searchQuery, Consulta.class, collection);
         if (consulta == null) {
             return "No se ha encontrado ninguna consulta con ese id";
         }
@@ -143,11 +142,11 @@ public class AAVVServiceImpl implements AAVVService {
     }
 
     @Override
-    public Object crearConsulta(ConsultaSincrona consulta) {
+    public Object crearResultadoConsulta(Consulta consulta) {
         consulta.setTsInsert(getTs());
         consulta.setTsLastUpdate(getTs());
         Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
-        ConsultaSincrona consultaResult = mongoOperations.findOne(searchQuery,ConsultaSincrona.class, consulta.getCollection());
+        Consulta consultaResult = mongoOperations.findOne(searchQuery,Consulta.class, consulta.getCollection());
         if(consultaResult == null) // Create
         {
             try {
@@ -164,7 +163,7 @@ public class AAVVServiceImpl implements AAVVService {
     }
 
     @Override
-    public String actualizarConsulta(ConsultaSincrona consulta){
+    public String actualizarResultadoConsulta(Consulta consulta){
         Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
         Update update = new Update().set("tsLastUpdate", getTs()).set("datos", consulta.getDatos());
         UpdateResult result;

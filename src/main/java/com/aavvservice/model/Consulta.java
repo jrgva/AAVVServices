@@ -2,7 +2,7 @@ package com.aavvservice.model;
 
 import org.springframework.data.annotation.Id;
 
-public class ConsultaSincrona {
+public class Consulta {
 
     @Id
     private String id;
@@ -11,7 +11,7 @@ public class ConsultaSincrona {
     private String collection;
     private Object datos;
 
-    public ConsultaSincrona() {
+    public Consulta() {
     }
 
     public String getId() {
