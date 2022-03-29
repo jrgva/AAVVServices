@@ -1,17 +1,17 @@
 package com.aavvservice.service.implementation;
 
-import com.aavvservice.model.AbrirRK;
-import com.aavvservice.model.AplazarFraccionarFacturas;
-import com.aavvservice.model.RealizarActuacionEyPO;
-import com.aavvservice.model.Tramite;
+import com.aavvservice.model.*;
 import com.aavvservice.repository.AAVVTramitesRepository;
 import com.aavvservice.service.AAVVService;
+import com.mongodb.client.result.UpdateResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -130,5 +130,50 @@ public class AAVVServiceImpl implements AAVVService {
             return "No se ha encontrado ningun tramite con ese id";
         }
         return tramite;
+    }
+
+    @Override
+    public Object obtenerConsultaSincrona(String collection, String Id) {
+        Query searchQuery = new Query(Criteria.where("_id").is(Id));
+        ConsultaSincrona consulta = mongoOperations.findOne(searchQuery,ConsultaSincrona.class, collection);
+        if (consulta == null) {
+            return "No se ha encontrado ninguna consulta con ese id";
+        }
+        return consulta;
+    }
+
+    @Override
+    public String crearConsulta(ConsultaSincrona consulta) {
+        consulta.setTsInsert(getTs());
+        consulta.setTsLastUpdate(getTs());
+        Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
+        ConsultaSincrona consultaResult = mongoOperations.findOne(searchQuery,ConsultaSincrona.class, consulta.getCollection());
+        if(consultaResult == null) // Create
+        {
+            try {
+                mongoOperations.insert(consulta, consulta.getCollection());
+            }
+            catch(Exception e){
+                return "Ha ocurrido un error al insertar la consulta en Mongo";
+            }
+            return "La consulta se ha insertado correctamente";
+        }
+        else { // Update
+            actualizarConsulta(consulta);
+            return "La consulta se ha actualizado correctamente";
+        }
+    }
+
+    @Override
+    public String actualizarConsulta(ConsultaSincrona consulta){
+        Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
+        Update update = new Update().set("tsLastUpdate", getTs()).set("datos", consulta.getDatos());
+        UpdateResult result;
+        result = mongoOperations.updateFirst(searchQuery, update, consulta.getCollection());
+        if (result.getMatchedCount()==0)
+            return "Ha ocurrido un error al encontrar la consulta en Mongo";
+        else if (result.getModifiedCount()==0)
+            return "Ha ocurrido un error al modificar la consulta en Mongo";
+        return "La consulta se ha actualizado correctamente";
     }
 }
