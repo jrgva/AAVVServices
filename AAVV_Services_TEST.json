@@ -1,180 +1,272 @@
 {
-  "info": {
-    "_postman_id": "4d6f37b2-c92f-42e3-bf8f-67a699cd7962",
-    "name": "AAVV Services",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Abrir Reclamacion",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"tsAAVV\":\"fecha1\",\r\n    \"documento\": \"86687\",\r\n    \"tipoDocumento\": \"tguhg\",\r\n    \"comentarioCliente\": \"comenta\",\r\n    \"datosReclamacion\": [\r\n        {\r\n            \"factura\": \"factura1\",\r\n            \"linea\": \"linea1\",\r\n            \"concepto\": \"concepto1\",\r\n            \"motivo\": \"motivo1\",\r\n            \"submotivo\": \"submotivo1\",\r\n            \"importe\": \"importe1\",\r\n            \"EyPO\": false,\r\n            \"suscripcion\": \"suscripcion1\",\r\n            \"bloqueo\": \"bloqueo1\",\r\n            \"baja\": \"baja1\",\r\n            \"devolucion\": \"devolucion1\"\r\n        },\r\n        {\r\n            \"factura\": \"factura2\",\r\n            \"linea\": \"linea2\",\r\n            \"concepto\": \"concepto2\",\r\n            \"motivo\": \"motivo2\",\r\n            \"submotivo\": \"submotivo2\",\r\n            \"importe\": \"importe2\",\r\n            \"EyPO\": false,\r\n            \"suscripcion\": \"suscripcion2\",\r\n            \"bloqueo\": \"bloqueo2\",\r\n            \"baja\": \"baja2\",\r\n            \"devolucion\": \"devolucion2\"\r\n        }\r\n    ]\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/aavv/abrirReclamacion",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "abrirReclamacion"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "ActuacionEyPO",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"tsAAVV\":\"fechaAAVV\",\r\n    \"documento\":\"documento\",\r\n    \"tipoDocumento\": \"tipoDocumento\",\r\n    \"datosActuacionEyPO\":[\r\n        {\r\n            \"linea\":\"linea1\",\r\n            \"suscripcion\":\"suscripcion1\",\r\n            \"bloqueo\": \"bloqueo1\",\r\n            \"baja\": \"baja1\"\r\n        },\r\n        {\r\n            \"linea\":\"linea2\",\r\n            \"suscripcion\":\"suscripcion2\",\r\n            \"bloqueo\": \"bloqueo2\",\r\n            \"baja\": \"baja2\"\r\n        }\r\n    ]\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/aavv/realizarActuacionEyPO",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "realizarActuacionEyPO"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Aplazar facturas",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"tsAAVV\":\"fechaAAVV\",\r\n    \"documento\":\"documento\",\r\n    \"tipoDocumento\": \"tipoDocumento\",\r\n    \"listaFacturas\":[\r\n        \"Factura1\",\r\n        \"Factura2\",\r\n        \"Factura3\"\r\n    ]\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/aavv/aplazarFacturas",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "aplazarFacturas"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Fraccionar facturas",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"tsAAVV\":\"fechaAAVV\",\r\n    \"documento\":\"documento\",\r\n    \"tipoDocumento\": \"tipoDocumento\",\r\n    \"listaFacturas\":[\r\n        \"Factura1\",\r\n        \"Factura2\",\r\n        \"Factura3\"\r\n    ]\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/aavv/fraccionarFacturas",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "fraccionarFacturas"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Obtener tramite no procesado",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8080/aavv/obtenerTramiteARealizar",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "obtenerTramiteARealizar"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Obtener tramite por Id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8080/aavv/obtenerTramite/20220314124651323",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "obtenerTramite",
-            "20220314124651323"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Test",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8080/aavv/obtenerTramite/20220314124651323",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "aavv",
-            "obtenerTramite",
-            "20220314124651323"
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "03a59c13-0080-40e6-8cba-a96c01156495",
+		"name": "AAVV Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Abrir Reclamacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tsAAVV\":\"2022-03-29T16:30:02.999Z\",\r\n    \"documento\": \"9999999D\",\r\n    \"tipoDocumento\": \"D\",\r\n    \"comentarioCliente\": \"comenta\",\r\n    \"datosReclamacion\": [\r\n        {\r\n            \"factura\": \"factura1\",\r\n            \"linea\": \"linea1\",\r\n            \"concepto\": \"concepto1\",\r\n            \"motivo\": \"motivo1\",\r\n            \"submotivo\": \"submotivo1\",\r\n            \"importe\": \"importe1\",\r\n            \"EyPO\": false,\r\n            \"suscripcion\": \"suscripcion1\",\r\n            \"bloqueo\": \"bloqueo1\",\r\n            \"baja\": \"baja1\",\r\n            \"devolucion\": \"devolucion1\"\r\n        },\r\n        {\r\n            \"factura\": \"factura2\",\r\n            \"linea\": \"linea2\",\r\n            \"concepto\": \"concepto2\",\r\n            \"motivo\": \"motivo2\",\r\n            \"submotivo\": \"submotivo2\",\r\n            \"importe\": \"importe2\",\r\n            \"EyPO\": false,\r\n            \"suscripcion\": \"suscripcion2\",\r\n            \"bloqueo\": \"bloqueo2\",\r\n            \"baja\": \"baja2\",\r\n            \"devolucion\": \"devolucion2\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/aavv/abrirReclamacion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"abrirReclamacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ActuacionEyPO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tsAAVV\":\"2022-03-29T16:30:02.999Z\",\r\n    \"documento\": \"9999999D\",\r\n    \"tipoDocumento\": \"D\",\r\n    \"datosActuacionEyPO\":[\r\n        {\r\n            \"linea\":\"linea1\",\r\n            \"suscripcion\":\"suscripcion1\",\r\n            \"bloqueo\": \"bloqueo1\",\r\n            \"baja\": \"baja1\"\r\n        },\r\n        {\r\n            \"linea\":\"linea2\",\r\n            \"suscripcion\":\"suscripcion2\",\r\n            \"bloqueo\": \"bloqueo2\",\r\n            \"baja\": \"baja2\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/aavv/realizarActuacionEyPO",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"realizarActuacionEyPO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aplazar facturas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tsAAVV\":\"2022-03-29T16:30:02.999Z\",\r\n    \"documento\": \"9999999D\",\r\n    \"tipoDocumento\": \"D\",\r\n    \"listaFacturas\":[\r\n        \"Factura1\",\r\n        \"Factura2\",\r\n        \"Factura3\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/aavv/aplazarFacturas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"aplazarFacturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fraccionar facturas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tsAAVV\":\"2022-03-29T16:30:02.999Z\",\r\n    \"documento\": \"9999999D\",\r\n    \"tipoDocumento\": \"D\",\r\n    \"listaFacturas\":[\r\n        \"Factura1\",\r\n        \"Factura2\",\r\n        \"Factura3\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/aavv/fraccionarFacturas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"fraccionarFacturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener tramite no procesado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/aavv/obtenerTramiteARealizar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"obtenerTramiteARealizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener tramite por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/aavv/obtenerTramite/20220314124651323",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"obtenerTramite",
+						"20220314124651323"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/aavv/obtenerTramite/20220314124651323",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"obtenerTramite",
+						"20220314124651323"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear datos consulta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":\"123456789\",\n\t\"collection\":\"NegociacionDeuda\",\n\t\"datos\":{\n\t\t\"dato1\":\"creado\",\n\t\t\"dato2\":\"creado\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/aavv/crearResultadoConsulta",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"crearResultadoConsulta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar datos consulta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":\"123456789\",\n\t\"collection\":\"NegociacionDeuda\",\n\t\"datos\":{\n\t\t\"dato1\":\"creado\",\n\t\t\"dato2\":\"creado\",\n\t\t\"dato3\":\"actualizado\",\n\t\t\"dato4\":\"actualizado\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/aavv/actualizarResultadoConsulta",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"actualizarResultadoConsulta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener resultado consulta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/aavv/obtenerResultadoConsulta/NegociacionDeuda/123456789",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"aavv",
+						"obtenerResultadoConsulta",
+						"NegociacionDeuda",
+						"123456789"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
 }
