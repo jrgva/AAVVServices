@@ -3,16 +3,23 @@ package com.aavvservice.model;
 public class DatosReclamacion {
 
     private String factura;
+    private String fechaEmision;
     private String linea;
     private String concepto;
     private String motivo;
     private String submotivo;
     private String importe;
-    private boolean EyPO;
-    private String suscripcion;
-    private String bloqueo;
-    private String baja;
-    private String devolucion;
+    private String tablaEyPO;
+    private String indiceSuscripcion;
+    private String eypo;
+    private String tipoSuscripcion;
+    private String cancelar;
+    private String devolver;
+    private String bloquear;
+    private String tipoBloqueo;
+    private String importeMaxEyPO;
+    private String importeFacturaEyPO;
+    private String importeVueloEyPO;
 
     public DatosReclamacion() {
     }
@@ -23,6 +30,14 @@ public class DatosReclamacion {
 
     public void setFactura(String factura) {
         this.factura = factura;
+    }
+
+    public String getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public void setFechaEmision(String fechaEmision) {
+        this.fechaEmision = fechaEmision;
     }
 
     public String getLinea() {
@@ -65,60 +80,115 @@ public class DatosReclamacion {
         this.importe = importe;
     }
 
-    public boolean isEyPO() {
-        return EyPO;
+    public String getTablaEyPO() {
+        return tablaEyPO;
     }
 
-    public void setEyPO(boolean eyPO) {
-        EyPO = eyPO;
+    public void setTablaEyPO(String tablaEyPO) {
+        this.tablaEyPO = tablaEyPO;
     }
 
-    public String getSuscripcion() {
-        return suscripcion;
+    public String getIndiceSuscripcion() {
+        return indiceSuscripcion;
     }
 
-    public void setSuscripcion(String suscripcion) {
-        this.suscripcion = suscripcion;
+    public void setIndiceSuscripcion(String indiceSuscripcion) {
+        this.indiceSuscripcion = indiceSuscripcion;
     }
 
-    public String getBloqueo() {
-        return bloqueo;
+    public String getEypo() {
+        return eypo;
     }
 
-    public void setBloqueo(String bloqueo) {
-        this.bloqueo = bloqueo;
+    public void setEypo(String eypo) {
+        this.eypo = eypo;
     }
 
-    public String getBaja() {
-        return baja;
+    public String getTipoSuscripcion() {
+        return tipoSuscripcion;
     }
 
-    public void setBaja(String baja) {
-        this.baja = baja;
+    public void setTipoSuscripcion(String tipoSuscripcion) {
+        this.tipoSuscripcion = tipoSuscripcion;
     }
 
-    public String getDevolucion() {
-        return devolucion;
+    public String getCancelar() {
+        return cancelar;
     }
 
-    public void setDevolucion(String devolucion) {
-        this.devolucion = devolucion;
+    public void setCancelar(String cancelar) {
+        this.cancelar = cancelar;
+    }
+
+    public String getDevolver() {
+        return devolver;
+    }
+
+    public void setDevolver(String devolver) {
+        this.devolver = devolver;
+    }
+
+    public String getBloquear() {
+        return bloquear;
+    }
+
+    public void setBloquear(String bloquear) {
+        this.bloquear = bloquear;
+    }
+
+    public String getTipoBloqueo() {
+        return tipoBloqueo;
+    }
+
+    public void setTipoBloqueo(String tipoBloqueo) {
+        this.tipoBloqueo = tipoBloqueo;
+    }
+
+    public String getImporteMaxEyPO() {
+        return importeMaxEyPO;
+    }
+
+    public void setImporteMaxEyPO(String importeMaxEyPO) {
+        this.importeMaxEyPO = importeMaxEyPO;
+    }
+
+    public String getImporteFacturaEyPO() {
+        return importeFacturaEyPO;
+    }
+
+    public void setImporteFacturaEyPO(String importeFacturaEyPO) {
+        this.importeFacturaEyPO = importeFacturaEyPO;
+    }
+
+    public String getImporteVueloEyPO() {
+        return importeVueloEyPO;
+    }
+
+    public void setImporteVueloEyPO(String importeVueloEyPO) {
+        this.importeVueloEyPO = importeVueloEyPO;
     }
 
     @Override
     public String toString() {
         return "{" +
                 "\"factura\":\"" + factura + "\"," +
+                "\"fechaEmision\":\"" + fechaEmision + "\"," +
                 "\"linea\":\"" + linea + "\"," +
                 "\"concepto\":\"" + concepto + "\"," +
                 "\"motivo\":\"" + motivo + "\"," +
                 "\"submotivo\":\"" + submotivo + "\"," +
                 "\"importe\":\"" + importe + "\"," +
-                "\"EyPO\":" + EyPO + "," +
-                "\"suscripcion\":\"" + suscripcion + "\"," +
-                "\"bloqueo\":\"" + bloqueo + "\"," +
-                "\"baja\":\"" + baja + "\"," +
-                "\"devolucion\":\"" + devolucion + "\"" +
+                "\"tablaEyPO\":\"" + tablaEyPO + "\"," +
+                "\"indiceSuscripcion\":\"" + indiceSuscripcion + "\"," +
+                "\"eypo\":\"" + eypo + "\"," +
+                "\"tipoSuscripcion\":\"" + tipoSuscripcion + "\"," +
+                "\"cancelar\":\"" + cancelar + "\"," +
+                "\"devolver\":\"" + devolver + "\"," +
+                "\"bloquear\":\"" + bloquear + "\"," +
+                "\"tipoBloqueo\":\"" + tipoBloqueo + "\"," +
+                "\"importeMaxEyPO\":\"" + importeMaxEyPO + "\"," +
+                "\"importeFacturaEyPO\":\"" + importeFacturaEyPO + "\"," +
+                "\"importeVueloEyPO\":\"" + importeVueloEyPO + "\"" +
                 "}";
     }
 }

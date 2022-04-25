@@ -79,17 +79,10 @@ public class AAVVController {
         return aavvService.obtenerResultadoConsulta(collection, Id);
     }
 
-    //@ApiOperation(value = "Crear una consulta en la BBDD de Mongo")
-    @PostMapping(value = "/crearResultadoConsulta")
-    public Object crearResultadoConsulta(@Valid @RequestBody Consulta consulta) {
-        logger.info("Creando el resultado de la consulta en Mongo: {}", consulta.toString());
-        return aavvService.crearResultadoConsulta(consulta);
-    }
-
     //@ApiOperation(value = "Actualiza una consulta en la BBDD de Mongo")
-    @PostMapping(value = "/actualizarResultadoConsulta")
-    public String actualizarResultadoConsulta(@Valid @RequestBody Consulta consulta) {
-        logger.info("Actualizando el restulado de la consulta {} en Mongo: {}", consulta.getId(), consulta.toString());
-        return aavvService.actualizarResultadoConsulta(consulta);
+    @PostMapping(value = "/insertarResultadoConsulta")
+    public String insertarResultadoConsulta(@Valid @RequestBody Consulta consulta) {
+        logger.info("Insertando el resultado de la consulta {} en Mongo: {}", consulta.getId(), consulta);
+        return aavvService.insertarResultadoConsulta(consulta);
     }
 }

@@ -6,8 +6,6 @@ public class Consulta {
 
     @Id
     private String id;
-    private String tsInsert;
-    private String tsLastUpdate;
     private String collection;
     private Object datos;
 
@@ -20,22 +18,6 @@ public class Consulta {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTsInsert() {
-        return tsInsert;
-    }
-
-    public void setTsInsert(String tsInsert) {
-        this.tsInsert = tsInsert;
-    }
-
-    public String getTsLastUpdate() {
-        return tsLastUpdate;
-    }
-
-    public void setTsLastUpdate(String tsLastUpdate) {
-        this.tsLastUpdate = tsLastUpdate;
     }
 
     public String getCollection() {
@@ -58,8 +40,6 @@ public class Consulta {
     public String toString() {
         return "{" +
                 "\"id\":\"" + id + "\"," +
-                "\"tsInsert\":\"" + tsInsert + "\"," +
-                "\"tsLastUpdate\":" + tsLastUpdate + "," +
                 "\"collection\":\"" + collection + "\"," +
                 "\"datos\":" + datos.toString() +
                 "}";

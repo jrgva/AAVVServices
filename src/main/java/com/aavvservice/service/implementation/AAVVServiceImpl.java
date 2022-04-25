@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.transform.Result;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Instant;
@@ -29,9 +30,9 @@ public class AAVVServiceImpl implements AAVVService {
 
     private static final Query findFirstOne = new Query().limit(1);
     private final Logger logger = LoggerFactory.getLogger(AAVVServiceImpl.class);
-    private AAVVTramitesRepository aavvTramites_repository;
-    private MongoOperations mongoOperations;
-    private HashMap<String, String> tramitePagename = new HashMap<>();
+    private final AAVVTramitesRepository aavvTramites_repository;
+    private final MongoOperations mongoOperations;
+    private final HashMap<String, String> tramitePagename = new HashMap<>();
 
     @Autowired
     public AAVVServiceImpl(AAVVTramitesRepository aavvTramites_repositorytory, MongoOperations mongoOperations) {
@@ -134,44 +135,43 @@ public class AAVVServiceImpl implements AAVVService {
     @Override
     public Object obtenerResultadoConsulta(String collection, String Id) {
         Query searchQuery = new Query(Criteria.where("_id").is(Id));
-        Consulta consulta = mongoOperations.findOne(searchQuery, Consulta.class, collection);
-        if (consulta == null) {
+        ResultadoConsulta resultadoConsulta = mongoOperations.findOne(searchQuery, ResultadoConsulta.class, collection);
+        if (resultadoConsulta == null) {
             return "No se ha encontrado ninguna consulta con ese id";
         }
-        return consulta;
+        return resultadoConsulta;
     }
 
     @Override
-    public Object crearResultadoConsulta(Consulta consulta) {
-        consulta.setTsInsert(getTs());
-        consulta.setTsLastUpdate(getTs());
+    public String insertarResultadoConsulta(Consulta consulta) {
         Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
-        Consulta consultaResult = mongoOperations.findOne(searchQuery,Consulta.class, consulta.getCollection());
-        if(consultaResult == null) // Create
+        ResultadoConsulta resultadoConsulta = mongoOperations.findOne(searchQuery,ResultadoConsulta.class, consulta.getCollection());
+        if(resultadoConsulta == null) // Create
         {
             try {
-                mongoOperations.insert(consulta, consulta.getCollection());
+                ResultadoConsulta newResultadoConsulta = new ResultadoConsulta();
+                newResultadoConsulta.setId(consulta.getId());
+                newResultadoConsulta.setCollection(consulta.getCollection());
+                newResultadoConsulta.setTsInsert(getTs());
+                newResultadoConsulta.setTsLastUpdate(getTs());
+                newResultadoConsulta.addDatos(consulta.getDatos());
+                mongoOperations.insert(newResultadoConsulta, newResultadoConsulta.getCollection());
             }
             catch(Exception e){
                 return "Ha ocurrido un error al insertar la consulta en Mongo";
             }
-            return "La consulta se ha insertado correctamente";
+            return "Los datos se han insertado correctamente";
         }
         else { // Update
-            return consultaResult;
+            resultadoConsulta.addDatos(consulta.getDatos());
+            Update update = new Update().set("tsLastUpdate", getTs()).set("datos", resultadoConsulta.getDatos());
+            UpdateResult result;
+            result = mongoOperations.updateFirst(searchQuery, update, resultadoConsulta.getCollection());
+            if (result.getMatchedCount()==0)
+                return "Ha ocurrido un error al encontrar la consulta en Mongo";
+            else if (result.getModifiedCount()==0)
+                return "Ha ocurrido un error al modificar la consulta en Mongo";
+            return "Los datos se han actualizado correctamente";
         }
-    }
-
-    @Override
-    public String actualizarResultadoConsulta(Consulta consulta){
-        Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
-        Update update = new Update().set("tsLastUpdate", getTs()).set("datos", consulta.getDatos());
-        UpdateResult result;
-        result = mongoOperations.updateFirst(searchQuery, update, consulta.getCollection());
-        if (result.getMatchedCount()==0)
-            return "Ha ocurrido un error al encontrar la consulta en Mongo";
-        else if (result.getModifiedCount()==0)
-            return "Ha ocurrido un error al modificar la consulta en Mongo";
-        return "La consulta se ha actualizado correctamente";
     }
 }
