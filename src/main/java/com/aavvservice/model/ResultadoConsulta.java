@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ResultadoConsulta {
 
@@ -15,7 +14,9 @@ public class ResultadoConsulta {
     private String collection;
     private ArrayList<Object> datos;
 
-    public ResultadoConsulta() {}
+    public ResultadoConsulta() {
+        this.datos = new ArrayList<Object>();
+    }
 
     public String getId() {
         return id;
@@ -49,7 +50,7 @@ public class ResultadoConsulta {
         this.collection = collection;
     }
 
-    public List<Object> getDatos() {
+    public ArrayList<Object> getDatos() {
         return datos;
     }
 
