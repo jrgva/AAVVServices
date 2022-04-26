@@ -2,8 +2,8 @@ package com.aavvservice.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class AplazarFraccionarFacturas {
 
@@ -13,7 +13,7 @@ public class AplazarFraccionarFacturas {
     private String documento;
     @NotBlank(message = "Se requiere el tipo de documento del cliente")
     private String tipoDocumento;
-    private List<String> listaFacturas;
+    private ArrayList<String> listaFacturas;
 
     public String getTsAAVV() {
         return tsAAVV;
@@ -39,11 +39,11 @@ public class AplazarFraccionarFacturas {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public List<String> getListaFacturas() {
+    public ArrayList<String> getListaFacturas() {
         return listaFacturas;
     }
 
-    public void setListaFacturas(List<String> listaFacturas) {
+    public void setListaFacturas(ArrayList<String> listaFacturas) {
         this.listaFacturas = listaFacturas;
     }
 

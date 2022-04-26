@@ -3,8 +3,8 @@ package com.aavvservice.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class AbrirRK {
 
@@ -16,7 +16,7 @@ public class AbrirRK {
     private String tipoDocumento;
     @Size(min = 0, max = 1500, message = "El comentario de cliente no puede exceder los 1500 caracteres")
     private String comentarioCliente;
-    private List<DatosReclamacion> datosReclamacion;
+    private ArrayList<DatosReclamacion> datosReclamacion;
 
     public String getTsAAVV() {
         return tsAAVV;
@@ -50,11 +50,11 @@ public class AbrirRK {
         this.comentarioCliente = comentarioCliente;
     }
 
-    public List<DatosReclamacion> getDatosReclamacion() {
+    public ArrayList<DatosReclamacion> getDatosReclamacion() {
         return datosReclamacion;
     }
 
-    public void setDatosReclamacion(List<DatosReclamacion> datosReclamacion) {
+    public void setDatosReclamacion(ArrayList<DatosReclamacion> datosReclamacion) {
         this.datosReclamacion = datosReclamacion;
     }
 

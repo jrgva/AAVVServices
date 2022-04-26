@@ -2,8 +2,8 @@ package com.aavvservice.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class RealizarActuacionEyPO {
 
@@ -13,7 +13,7 @@ public class RealizarActuacionEyPO {
     private String documento;
     @NotBlank(message = "Se requiere el tipo de documento del cliente")
     private String tipoDocumento;
-    private List<DatosActuacionEyPO> datosActuacionEyPO;
+    private ArrayList<DatosActuacionEyPO> datosActuacionEyPO;
 
     public String getTsAAVV() {
         return tsAAVV;
@@ -39,11 +39,11 @@ public class RealizarActuacionEyPO {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public List<DatosActuacionEyPO> getDatosActuacionEyPO() {
+    public ArrayList<DatosActuacionEyPO> getDatosActuacionEyPO() {
         return datosActuacionEyPO;
     }
 
-    public void setDatosActuacionEyPO(List<DatosActuacionEyPO> datosActuacionEyPO) {
+    public void setDatosActuacionEyPO(ArrayList<DatosActuacionEyPO> datosActuacionEyPO) {
         this.datosActuacionEyPO = datosActuacionEyPO;
     }
 
