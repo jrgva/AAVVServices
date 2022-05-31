@@ -2,6 +2,7 @@ package com.aavvservice.model;
 
 public class DatosActuacionEyPO {
 
+    private String suscripcionEyPO;
     private String tablaEyPO;
     private String indiceSuscripcion;
     private String eypo;
@@ -15,6 +16,14 @@ public class DatosActuacionEyPO {
     private String importeVueloEyPO;
 
     public DatosActuacionEyPO() {
+    }
+
+    public String getSuscripcionEyPO() {
+        return suscripcionEyPO;
+    }
+
+    public void setSuscripcionEyPO(String suscripcionEyPO) {
+        this.suscripcionEyPO = suscripcionEyPO;
     }
 
     public String getTablaEyPO() {
@@ -108,6 +117,7 @@ public class DatosActuacionEyPO {
     @Override
     public String toString() {
         return "{" +
+                "\"suscripcionEyPO\":\"" + suscripcionEyPO + "\"," +
                 "\"tablaEyPO\":\"" + tablaEyPO + "\"," +
                 "\"indiceSuscripcion\":\"" + indiceSuscripcion + "\"," +
                 "\"eypo\":\"" + eypo + "\"," +

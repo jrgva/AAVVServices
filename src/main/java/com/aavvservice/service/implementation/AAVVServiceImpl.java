@@ -30,9 +30,9 @@ public class AAVVServiceImpl implements AAVVService {
 
     private static final Query findFirstOne = new Query().limit(1);
     private final Logger logger = LoggerFactory.getLogger(AAVVServiceImpl.class);
-    private final AAVVTramitesRepository aavvTramites_repository;
-    private final MongoOperations mongoOperations;
-    private final HashMap<String, String> tramitePagename = new HashMap<>();
+    private AAVVTramitesRepository aavvTramites_repository;
+    private MongoOperations mongoOperations;
+    private HashMap<String, String> tramitePagename = new HashMap<>();
 
     @Autowired
     public AAVVServiceImpl(AAVVTramitesRepository aavvTramites_repositorytory, MongoOperations mongoOperations) {
@@ -42,8 +42,8 @@ public class AAVVServiceImpl implements AAVVService {
     }
 
     private void populateMap() {
-        tramitePagename.put("Reclamacion", "101_Reclamacion_AAVV");
-        tramitePagename.put("ActuacionEyPO", "101_ActuacionEyPO_AAVV");
+        tramitePagename.put("Reclamacion", "101_AperturaReclamacion_AAVV");
+        tramitePagename.put("ActuacionEyPO", "101_RealizarActuacionEyPO_AAVV");
         tramitePagename.put("Fraccionamiento", "104_Fraccionamiento_AAVV");
         tramitePagename.put("Aplazamiento", "104_Aplazamiento_AAVV");
     }
@@ -74,7 +74,7 @@ public class AAVVServiceImpl implements AAVVService {
         tramite.setPagename(tramitePagename.get(tipoTramite));
         tramite.setDatosTramite(body);
         try {
-            mongoOperations.insert(tramite, "TramitesPendientes");
+            mongoOperations.insert(tramite, "TramitesAAVV");
         }
         catch(Exception e){
             return "Ha ocurrido un error al insertar el tramite pendiente en Mongo";
@@ -95,8 +95,14 @@ public class AAVVServiceImpl implements AAVVService {
     }
 
     @Override
-    public String createTramiteAplazarFraccionarFacturas(AplazarFraccionarFacturas aplazarFraccionarFacturas, String tipoTramite) {
-        String result = insertTramitePendiente(aplazarFraccionarFacturas, tipoTramite, aplazarFraccionarFacturas.getTsAAVV());
+    public String createTramiteAplazarFacturas(AplazarFacturas aplazarFacturas) {
+        String result = insertTramitePendiente(aplazarFacturas, "Aplazamiento", aplazarFacturas.getTsAAVV());
+        return result;
+    }
+
+    @Override
+    public String createTramiteFraccionarFacturas(FraccionarFacturas fraccionarFacturas) {
+        String result = insertTramitePendiente(fraccionarFacturas, "Fraccionamiento", fraccionarFacturas.getTsAAVV());
         return result;
     }
 
@@ -108,14 +114,14 @@ public class AAVVServiceImpl implements AAVVService {
         }
         Query searchQuery = new Query(Criteria.where("id").is(tramite.getId()));
         try {
-            mongoOperations.remove(searchQuery, Tramite.class, "TramitesPendientes");
+            mongoOperations.remove(searchQuery, Tramite.class, "TramitesAAVV");
         }
         catch(Exception e){
             return "Ha ocurrido un error al borrar el trámite pendiente";
         }
         tramite.setTsInsertCompleted(getTs());
         try {
-            mongoOperations.insert(tramite, "TramitesCompletados");
+            mongoOperations.insert(tramite, "TramitesAAVV_store");
         }
         catch(Exception e){
             return "Ha ocurrido un error al insertar el tramite completado en Mongo";
@@ -135,43 +141,22 @@ public class AAVVServiceImpl implements AAVVService {
     @Override
     public Object obtenerResultadoConsulta(String collection, String Id) {
         Query searchQuery = new Query(Criteria.where("_id").is(Id));
-        ResultadoConsulta resultadoConsulta = mongoOperations.findOne(searchQuery, ResultadoConsulta.class, collection);
-        if (resultadoConsulta == null) {
+        Consulta consulta = mongoOperations.findOne(searchQuery, Consulta.class, collection);
+        if (consulta == null) {
             return "No se ha encontrado ninguna consulta con ese id";
         }
-        return resultadoConsulta;
+        return consulta;
     }
 
     @Override
-    public String insertarResultadoConsulta(Consulta consulta) {
-        Query searchQuery = new Query(Criteria.where("_id").is(consulta.getId()));
-        ResultadoConsulta resultadoConsulta = mongoOperations.findOne(searchQuery,ResultadoConsulta.class, consulta.getCollection());
-        if(resultadoConsulta == null) // Create
-        {
-            try {
-                ResultadoConsulta newResultadoConsulta = new ResultadoConsulta();
-                newResultadoConsulta.setId(consulta.getId());
-                newResultadoConsulta.setCollection(consulta.getCollection());
-                newResultadoConsulta.setTsInsert(getTs());
-                newResultadoConsulta.setTsLastUpdate(getTs());
-                newResultadoConsulta.addDatos(consulta.getDatos());
-                mongoOperations.insert(newResultadoConsulta, newResultadoConsulta.getCollection());
-            }
-            catch(Exception e){
-                return "Ha ocurrido un error al insertar la consulta en Mongo";
-            }
-            return "Los datos se han insertado correctamente";
-        }
-        else { // Update
-            resultadoConsulta.addDatos(consulta.getDatos());
-            Update update = new Update().set("tsLastUpdate", getTs()).set("datos", resultadoConsulta.getDatos());
-            UpdateResult result;
-            result = mongoOperations.updateFirst(searchQuery, update, resultadoConsulta.getCollection());
-            if (result.getMatchedCount()==0)
-                return "Ha ocurrido un error al encontrar la consulta en Mongo";
-            else if (result.getModifiedCount()==0)
-                return "Ha ocurrido un error al modificar la consulta en Mongo";
-            return "Los datos se han actualizado correctamente";
-        }
+    public String insertarResultadoConsulta(Consulta consulta){
+        Query searchQuery = new Query().addCriteria(Criteria.where("_id").is(consulta.getId()));
+        Update update = new Update();
+        update.setOnInsert("tsInsert", getTs());
+        update.set("tsLastUpdate", getTs());
+        update.set("collection", consulta.getCollection());
+        update.addToSet("datos", consulta.getDatos());
+        mongoOperations.upsert(searchQuery,update, consulta.getCollection());
+        return "Los datos se han actualizado correctamente";
     }
 }

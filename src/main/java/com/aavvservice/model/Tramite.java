@@ -2,7 +2,7 @@ package com.aavvservice.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "TramitesPendientes")
+@Document(collection = "TramitesAAVV")
 public class Tramite {
 
     private String id;

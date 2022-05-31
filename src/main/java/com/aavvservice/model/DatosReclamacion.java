@@ -5,7 +5,7 @@ public class DatosReclamacion {
     private String factura;
     private String fechaEmision;
     private String linea;
-    private String concepto;
+    private String producto;
     private String motivo;
     private String submotivo;
     private String importe;
@@ -48,12 +48,12 @@ public class DatosReclamacion {
         this.linea = linea;
     }
 
-    public String getConcepto() {
-        return concepto;
+    public String getProducto() {
+        return producto;
     }
 
-    public void setConcepto(String concepto) {
-        this.concepto = concepto;
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
     public String getMotivo() {
@@ -174,7 +174,7 @@ public class DatosReclamacion {
                 "\"factura\":\"" + factura + "\"," +
                 "\"fechaEmision\":\"" + fechaEmision + "\"," +
                 "\"linea\":\"" + linea + "\"," +
-                "\"concepto\":\"" + concepto + "\"," +
+                "\"producto\":\"" + producto + "\"," +
                 "\"motivo\":\"" + motivo + "\"," +
                 "\"submotivo\":\"" + submotivo + "\"," +
                 "\"importe\":\"" + importe + "\"," +
@@ -192,3 +192,4 @@ public class DatosReclamacion {
                 "}";
     }
 }
+

@@ -12,11 +12,9 @@ public class ResultadoConsulta {
     private String tsInsert;
     private String tsLastUpdate;
     private String collection;
-    private ArrayList<Object> datos;
+    private Object datos;
 
-    public ResultadoConsulta() {
-        this.datos = new ArrayList<Object>();
-    }
+    public ResultadoConsulta() {}
 
     public String getId() {
         return id;
@@ -50,16 +48,12 @@ public class ResultadoConsulta {
         this.collection = collection;
     }
 
-    public ArrayList<Object> getDatos() {
+    public Object getDatos() {
         return datos;
     }
 
-    public void setDatos(ArrayList<Object> datos) {
+    public void setDatos(Object datos) {
         this.datos = datos;
-    }
-
-    public void addDatos(Object consulta){
-        this.datos.add(consulta);
     }
 
     @Override
@@ -69,7 +63,7 @@ public class ResultadoConsulta {
                 "\"tsInsert\":\"" + tsInsert + "\"," +
                 "\"tsLastUpdate\":" + tsLastUpdate + "," +
                 "\"collection\":\"" + collection + "\"," +
-                "\"datos\":" + Arrays.toString(datos.toArray()) +
+                "\"datos\":" + datos.toString() +
                 "}";
     }
 
